@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Ozon</h1>
+            <form>
+                <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input name="search" class="form-control" type="search" value="{{search}}">
+                        </div>
+                    </div>
+                </form>
+            </form>
+            <ul class="list-group mt-2"> <!--  mt-x добавляет вертикальный отступ -->
+                {% for book in books %}
+                <li class="list-group-item">
+                    <!-- {{book['title']}}, (Author: {{book['author']}}) -->
+                    <a href="{{ url_for('book_details', id=book.id) }}">{{book.title}}, (Author: {{book.author}})</a>
+
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% if not books %}
+            <p>No books, try again later</p>
+            {% endif %}
+            <a href="{{ url_for('book_edit', id='new') }}" class="btn btn-primary">Add New Book</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

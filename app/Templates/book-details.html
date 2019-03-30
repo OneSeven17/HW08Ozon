@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ book.title }}</title>
+</head>
+<body>
+<h1>{{ book.title }}</h1>
+<p>{{ book.author }}</p>
+<p>{{ book.price }}</p>
+
+<form action="{{ url_for('book_remove', id=book.id) }}" method="post">
+    <button>Remove</button>
+</form>
+<div class="mt-2">
+ <button><a href="{{ url_for('book_edit', id=book.id) }}" class="btn btn-primary">Book Edit</a></button>
+</div>
+</body>
+</html>
