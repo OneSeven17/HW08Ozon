@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, url_for
 from ozon import create_book, add_book, search_books
 from werkzeug.utils import redirect
 
-from app.ozon import search_book_by_id, remove_book_by_id, create_empty_book
+from app.ozon import search_book_by_id, remove_book_by_id, create_empty_book, change_book
 
 
 def start():
@@ -80,8 +80,9 @@ def start():
             book = create_book(title=title, author=author, price=price, tags=tags)
             books_list = add_book(books_list, book)
         else:
-            book = search_book_by_id(books_list, id)
-            pass
+            books_list = remove_book_by_id(books_list, id)
+            book = change_book(id=id, title=title, author=author, price=price, tags=tags)
+            books_list = add_book(books_list, book)
         return redirect(url_for('book_details', id=book['id']))
 
     @app.route('/books/<id>/remove', methods=['POST']) # routing, mapping url

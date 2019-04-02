@@ -53,3 +53,13 @@ def remove_book_by_id(books_list, id):
         if book['id'] != id:
             result.append(book)
     return result
+
+
+def change_book(id, title, author, price, tags):
+    return {
+    'id': id,
+    'title': title,
+    'author': author,
+    'price': price,
+    'tags': tags,
+    }
