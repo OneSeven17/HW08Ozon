@@ -5,18 +5,29 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>{{ book.title }}</title>
 </head>
 <body>
-<h1>{{ book.title }}</h1>
-<p>{{ book.author }}</p>
-<p>{{ book.price }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card mt-2" style="width: 18rem;">
+            <img src={{book.url}} class="card-img-top" alt="...">
+            <h1>{{ book.title }}</h1>
+            <p>{{ book.author }}</p>
+            <p>{{ book.price }}</p>
+            </div>
 
-<form action="{{ url_for('book_remove', id=book.id) }}" method="post">
-    <button>Remove</button>
-</form>
-<div class="mt-2">
- <button><a href="{{ url_for('book_edit', id=book.id) }}" class="btn btn-primary">Book Edit</a></button>
+            <form action="{{ url_for('book_remove', id=book.id) }}" method="post">
+                <button>Remove</button>
+            </form>
+            <div class="mt-2">
+                <button><a href="{{ url_for('book_edit', id=book.id) }}" class="btn btn-primary">Book Edit</a></button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

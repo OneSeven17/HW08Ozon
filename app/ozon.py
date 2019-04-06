@@ -1,13 +1,14 @@
 import uuid
 
 
-def create_book(title, author, price, tags):
+def create_book(title, author, price, tags, url):
     return {
     'id': str(uuid.uuid4()),
     'title': title,
     'author': author,
     'price': price,
     'tags': tags,
+    'url': url,
     }
 
 def create_empty_book():
@@ -17,6 +18,7 @@ def create_empty_book():
     'author': '',
     'price': '',
     'tags': '',
+    'url': '',
     }
 
 def add_book(container, book):

@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 <body>
@@ -18,19 +19,27 @@
                 <form>
                     <div class="form-row">
                         <div class="col">
-                            <input name="search" class="form-control" type="search" value="{{search}}">
+                            <input name="search" class="form-control" type="search" value="{{search}}" background-color:
+                                   #7>
                         </div>
                     </div>
                 </form>
             </form>
-            <ul class="list-group mt-2"> <!--  mt-x добавляет вертикальный отступ -->
-                {% for book in books %}
-                <li class="list-group-item">
-                    <!-- {{book['title']}}, (Author: {{book['author']}}) -->
-                    <a href="{{ url_for('book_details', id=book.id) }}">{{book.title}}, (Author: {{book.author}})</a>
-
-                </li>
-                {% endfor %}
+            <ul class="list-group mt-3"> <!--  mt-x добавляет вертикальный отступ -->
+                <div class="row">
+                    {% for book in books %}
+                    <div class="col-sm-6">
+                        <div class="card mt-2" style="width: 12rem;">
+                            <img src={{book.url}} class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{book.title}}</h5>
+                                <p class="card-text"></p>
+                                <a href="{{ url_for('book_details', id=book.id) }}">(Author: {{book.author}})</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </ul>
 
             {% if not books %}

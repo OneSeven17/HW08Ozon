@@ -20,7 +20,7 @@ def test_add_one_book_to_empty_library():
 
     add_book(container, book)
 
-    assert  len(container) == 1
+    assert len(container) == 1
     assert book in container
 
 def test_search_title():
