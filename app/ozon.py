@@ -57,11 +57,12 @@ def remove_book_by_id(books_list, id):
     return result
 
 
-def change_book(id, title, author, price, tags):
+def change_book(id, title, author, price, tags, url):
     return {
     'id': id,
     'title': title,
     'author': author,
     'price': price,
     'tags': tags,
+    'url': url,
     }

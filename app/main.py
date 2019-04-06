@@ -1,5 +1,6 @@
 import os
 
+import waitress
 from flask import Flask, render_template, request, url_for
 
 from ozon import create_book, add_book, search_books
@@ -12,14 +13,6 @@ def start():
     app = Flask(__name__)
 
     books_list = []
-
-    war_and_piece = create_book(
-        'Война и мир',
-        'Толстой',
-        1000,
-        'война, любовь',
-        'http://forkidsandmum.ru/pictures/books_covers/1010257708.jpg'
-    )
 
     anna_karenina = create_book(
         'Анна Каренина',
@@ -37,6 +30,14 @@ def start():
         'https://ozon-st.cdn.ngenix.net/multimedia/1022171034.jpg'
     )
 
+    war_and_piece = create_book(
+        'Война и мир',
+        'Толстой',
+        1000,
+        'война, любовь',
+        'http://forkidsandmum.ru/pictures/books_covers/1010257708.jpg'
+    )
+
     crime_and_justice = create_book(
         'Преступление и наказание',
         'Достоевский',
@@ -45,9 +46,9 @@ def start():
         'https://biblio.by/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/2/7/2785.jpg'
     )
 
-    books_list = add_book(books_list, war_and_piece)
     books_list = add_book(books_list, anna_karenina)
     books_list = add_book(books_list, idiot)
+    books_list = add_book(books_list, war_and_piece)
     books_list = add_book(books_list, crime_and_justice)
 
     @app.route('/')
@@ -80,12 +81,13 @@ def start():
         author = request.form['author']
         price = request.form['price']
         tags = request.form['tags']
+        url = request.form['url']
         if id == 'new':
-            book = create_book(title=title, author=author, price=price, tags=tags)
+            book = create_book(title=title, author=author, price=price, tags=tags, url=url)
             books_list = add_book(books_list, book)
         else:
             books_list = remove_book_by_id(books_list, id)
-            book = change_book(id=id, title=title, author=author, price=price, tags=tags)
+            book = change_book(id=id, title=title, author=author, price=price, tags=tags, url=url)
             books_list = add_book(books_list, book)
         return redirect(url_for('book_details', id=book['id']))
 
@@ -95,6 +97,8 @@ def start():
         books_list = remove_book_by_id(books_list, id)
         return redirect(url_for('index'))
 
+    print(os.getenv('APP_ENV'))
+    print(os.getenv('PORT'))
     if os.getenv('APP_ENV') == 'PROD' and os.getenv('PORT'):
         waitress.serve(app, port=os.getenv('PORT'))
     else:
