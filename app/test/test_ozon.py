@@ -4,6 +4,7 @@ from app.ozon import create_book, add_book, search_books
 def test_create_book():
 
     data = {
+    'id': 'id',
     'title': 'Война и мир',
     'author': 'Толстой',
     'price': 1000,
@@ -11,7 +12,7 @@ def test_create_book():
     'url': 'url',
      }
 
-    result = create_book(data['title'], data['author'], data['price'], data['tags'], data['url'])
+    result = create_book(data['id'], data['title'], data['author'], data['price'], data['tags'], data['url'])
 
     assert data == result
 
@@ -66,7 +67,7 @@ def test_search_title():
         'author': 'Толстой',
         'price': 1000,
         'tags': 'война, любовь',
-        'http://forkidsandmum.ru/pictures/books_covers/1010257708.jpg'
+        'url': 'http://forkidsandmum.ru/pictures/books_covers/1010257708.jpg'
     }]
     result = search_books(books_list, 'мир')
     assert founded_book == result
@@ -105,7 +106,7 @@ def test_search_author():
         'author': 'Толстой',
         'price': 1000,
         'tags': 'война, любовь',
-        'http://forkidsandmum.ru/pictures/books_covers/1010257708.jpg'
+        'url': 'http://forkidsandmum.ru/pictures/books_covers/1010257708.jpg'
     }]
 
     result = search_books(books_list, 'Толстой')
@@ -153,7 +154,7 @@ def test_search_tag():
         'author': 'Толстой',
         'price': 500,
         'tags': 'поезд, любовь',
-        'https://img.yakaboo.ua/media/catalog/product/cache/1/image/234c7c011ba026e66d29567e1be1d1f7/c/o/cover1_229_52.jpg'
+        'url': 'https://img.yakaboo.ua/media/catalog/product/cache/1/image/234c7c011ba026e66d29567e1be1d1f7/c/o/cover1_229_52.jpg'
     }]
     result = search_books(books_list, 'поезд')
     assert founded_book == result
